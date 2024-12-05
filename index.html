@@ -12,34 +12,17 @@
 </html>
 <script type="text/babel">
     const root = document.querySelector("#root");
-
-    const Title = () => {
-        return (
-            <h3 id="title" onMouseEnter = {() => console.log("mouse enter")}>
-                Hello I'm a title
-            </h3>
-        )
-    }
-    const Button = () => {
-        return (
-            <button 
-                style={{
-                    backgroundColor : "tomato"
-                }}
-                onClick = {() => console.log("I'm clicked")}
-            >
-                Click me
-            </button>
-        )
-    }
-
-    const Container = () => {
+    const App = () => {
+        // 구조분해 할당 이용
+        // state가 바뀌면 reRendering이 발생하게 된다.
+        const [counter, setCounter] = React.useState(0);
+        const onClick = () => setCounter(counter + 1);
         return (
             <div>
-                <Title />
-                <Button />
+                <h3>Total clicks : {counter}</h3>
+                <button onClick = {onClick}>Click me</button>
             </div>
-        )
+        );
     }
-    ReactDOM.render(<Container />, root);
+    ReactDOM.render(<App />, root);
 </script>
