@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/Nomad_React_MasterClass/static/css/main.7fe0d5b3.css",
-    "main.js": "/Nomad_React_MasterClass/static/js/main.b93a227c.js",
+    "main.js": "/Nomad_React_MasterClass/static/js/main.c2f0b8d3.js",
     "index.html": "/Nomad_React_MasterClass/index.html",
     "main.7fe0d5b3.css.map": "/Nomad_React_MasterClass/static/css/main.7fe0d5b3.css.map",
-    "main.b93a227c.js.map": "/Nomad_React_MasterClass/static/js/main.b93a227c.js.map"
+    "main.c2f0b8d3.js.map": "/Nomad_React_MasterClass/static/js/main.c2f0b8d3.js.map"
   },
   "entrypoints": [
     "static/css/main.7fe0d5b3.css",
-    "static/js/main.b93a227c.js"
+    "static/js/main.c2f0b8d3.js"
   ]
 }
