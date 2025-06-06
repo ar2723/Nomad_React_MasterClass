@@ -5,6 +5,7 @@ import App2 from './basic/App2';
 import App3 from './App';
 import Coin from './Coin';
 import Movie from './Movie';
+import "./styles.css"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
