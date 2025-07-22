@@ -3,6 +3,7 @@ import {IHistorical, RouteParams} from "../interface/coinInterface";
 import {fetchCoinHistory} from "../api/api";
 import {Loader} from "../component/Layout";
 import ReactApexChart from "react-apexcharts";
+import {currencyFormatter} from "../utils/util";
 
 function Price(props:RouteParams) {
     const {isLoading, data} = useQuery<IHistorical[]>(
@@ -44,27 +45,18 @@ function Price(props:RouteParams) {
                 xaxis: {type: "datetime", axisTicks: {show: false}},
                 yaxis: {show:false},
                 tooltip: {
-                    custom: function({ series, seriesIndex, dataPointIndex, w }) {
+                    custom: function({ seriesIndex, dataPointIndex, w }) {
                         const ohlc = w.globals.initialSeries[seriesIndex].data[dataPointIndex].y;
                         const label = w.globals.categoryLabels[dataPointIndex];
                         const [open, high, low, close] = ohlc;
 
-                        const format = (v:number) => new Intl.NumberFormat ('en-US',
-                            {
-                                style: 'currency',
-                                currency: 'USD',
-                                minimumFractionDigits: 0,
-                                maximumFractionDigits: 0
-                            }
-                        ).format(v);
-
                         return `
                             <div style="padding: 8px;">
                                 <div><strong>${label}</strong></div>
-                                <div>Open: ${format(open)}</div>
-                                <div>High: ${format(high)}</div>
-                                <div>Low: ${format(low)}</div>
-                                <div>Close: ${format(close)}</div>
+                                <div>Open: ${currencyFormatter(open)}</div>
+                                <div>High: ${currencyFormatter(high)}</div>
+                                <div>Low: ${currencyFormatter(low)}</div>
+                                <div>Close: ${currencyFormatter(close)}</div>
                             </div>
                         `;
                     }

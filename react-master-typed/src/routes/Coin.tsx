@@ -17,6 +17,7 @@ import Price from "./Price";
 import {useQuery} from "@tanstack/react-query";
 import {fetchCoinInfo, fetchCoinTickers} from "../api/api";
 import {Helmet} from "react-helmet-async";
+import {currencyFormatter} from "../utils/util";
 
 const Coin = () => {
     const { coinId } = useParams<RouteParams>();
@@ -69,7 +70,7 @@ const Coin = () => {
                         </OverviewItem>
                         <OverviewItem>
                             <span>Price:</span>
-                            <span>{priceInfo?.quotes.USD.price.toFixed(2)}</span>
+                            <span>{priceInfo? currencyFormatter(priceInfo.quotes.USD.price) : 0}</span>
                         </OverviewItem>
                     </Overview>
                     <Description>{coinInfo?.description}</Description>
