@@ -1,10 +1,10 @@
 import {useQuery} from "@tanstack/react-query";
 import {fetchCoinHistory} from "../api/api";
 import ReactApexChart from "react-apexcharts";
-import {IHistorical, RouteParams} from "../interface/coinInterface";
+import {IChartProps, IHistorical} from "../interface/coinInterface";
 import {Loader} from "../component/Layout";
 
-function Chart(props: RouteParams) {
+function Chart(props: IChartProps) {
     const {isLoading, data} = useQuery<IHistorical[]>(
         {
             queryKey: ["ohlcv", props.coinId ],
@@ -24,7 +24,7 @@ function Chart(props: RouteParams) {
                     }
                 ]}
                 options={{
-                    theme: {mode: "dark"},
+                    theme: {mode: props.isDark ? "dark" : "light"},
                     chart: {
                         height: 300,
                         width: "100%",

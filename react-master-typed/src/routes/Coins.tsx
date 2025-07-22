@@ -1,12 +1,11 @@
-import styled from "styled-components";
 import {Link} from "react-router-dom";
 import {Container, Loader, Title, Header, Coin, CoinList, Img} from "../component/Layout";
 import {fetchCoins} from "../api/api";
 import {useQuery} from "@tanstack/react-query";
-import {ICoin} from "../interface/coinInterface";
+import {ICoin, ICoinProps} from "../interface/coinInterface";
 import {Helmet} from "react-helmet-async";
 
-const Coins = () => {
+const Coins = ({toggleDark}:ICoinProps) => {
     // react-query hook
     //  불러온 데이터를 캐시에 저장해두기 때문에 다른 페이지를 갔다와도 다시 로딩이 되지 않음
     const { isLoading, data } = useQuery<ICoin[]>(
@@ -18,6 +17,7 @@ const Coins = () => {
             </Helmet>
             <Header>
                 <Title>코인</Title>
+                <button onClick={toggleDark}>Toggle Dark Mode</button>
             </Header>
             {isLoading ? (
                 <Loader>"Loading..."</Loader>

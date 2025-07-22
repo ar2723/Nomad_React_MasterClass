@@ -1,5 +1,5 @@
 import {useParams} from "react-router";
-import {IInfoData, IPriceData, RouteParams, RouteState} from "../interface/coinInterface";
+import {ICoinProps, IInfoData, IPriceData, RouteParams, RouteState} from "../interface/coinInterface";
 import {Link, Route, Switch, useLocation, useRouteMatch} from "react-router-dom";
 import {
     Container,
@@ -19,7 +19,7 @@ import {fetchCoinInfo, fetchCoinTickers} from "../api/api";
 import {Helmet} from "react-helmet-async";
 import {currencyFormatter} from "../utils/util";
 
-const Coin = () => {
+const Coin = (props:ICoinProps) => {
     const { coinId } = useParams<RouteParams>();
     const { state } = useLocation<RouteState>();
     const priceMatch = useRouteMatch("/:coinId/price");
@@ -95,10 +95,10 @@ const Coin = () => {
                     </Tabs>
                     <Switch>
                         <Route path={`/:coinId/price`}>
-                            <Price coinId={coinId}/>
+                            <Price isDark={props.isDark} coinId={coinId}/>
                         </Route>
                         <Route path={`/:coinId/chart`}>
-                            <Chart coinId={coinId}/>
+                            <Chart isDark={props.isDark} coinId={coinId}/>
                         </Route>
                     </Switch>
                 </>
