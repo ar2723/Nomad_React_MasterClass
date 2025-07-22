@@ -6,7 +6,10 @@ import {useQuery} from "@tanstack/react-query";
 import {ICoin} from "../interface/coinInterface";
 
 const Coins = () => {
-    const { isLoading, data } = useQuery<ICoin[]>({ queryKey: ["allCoins"], queryFn: fetchCoins});
+    // react-query hook
+    //  불러온 데이터를 캐시에 저장해두기 때문에 다른 페이지를 갔다와도 다시 로딩이 되지 않음
+    const { isLoading, data } = useQuery<ICoin[]>(
+        { queryKey: ["allCoins"], queryFn: fetchCoins });
     return (
         <Container>
             <Header>
@@ -20,10 +23,10 @@ const Coins = () => {
                         <Coin key={coin.id}>
                             <Link to={{
                                 pathname:`/${coin.id}`,
-                                state: { name: coin.name},
+                                state: {name: coin.name},
                             }}>
                                 <Img src={`https://cryptocurrencyliveprices.com/img/${coin.id}.png`}/>
-                                {coin.name} &rarr;
+                                <span>{coin.name} &rarr;</span>
                             </Link>
                         </Coin>
                     )}
