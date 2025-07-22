@@ -4,6 +4,7 @@ import {Container, Loader, Title, Header, Coin, CoinList, Img} from "../componen
 import {fetchCoins} from "../api/api";
 import {useQuery} from "@tanstack/react-query";
 import {ICoin} from "../interface/coinInterface";
+import {Helmet} from "react-helmet-async";
 
 const Coins = () => {
     // react-query hook
@@ -12,6 +13,9 @@ const Coins = () => {
         { queryKey: ["allCoins"], queryFn: fetchCoins });
     return (
         <Container>
+            <Helmet>
+                <title>코인</title>
+            </Helmet>
             <Header>
                 <Title>코인</Title>
             </Header>
@@ -21,12 +25,9 @@ const Coins = () => {
                 <CoinList>
                     {data?.slice(0, 100).map(coin =>
                         <Coin key={coin.id}>
-                            <Link to={{
-                                pathname:`/${coin.id}`,
-                                state: {name: coin.name},
-                            }}>
+                            <Link to={{pathname:`/${coin.id}`, state: {name: coin.name}}}>
                                 <Img src={`https://cryptocurrencyliveprices.com/img/${coin.id}.png`}/>
-                                <span>{coin.name} &rarr;</span>
+                                {coin.name} &rarr;
                             </Link>
                         </Coin>
                     )}

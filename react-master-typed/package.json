@@ -16,6 +16,8 @@
     "react": "^19.1.0",
     "react-apexcharts": "^1.7.0",
     "react-dom": "^19.1.0",
+    "react-helmet": "^6.1.0",
+    "react-helmet-async": "^2.0.5",
     "react-router-dom": "^5.3.4",
     "react-scripts": "5.0.1",
     "styled-components": "^6.1.19",
@@ -48,6 +50,7 @@
   },
   "devDependencies": {
     "@tanstack/react-query-devtools": "^5.83.0",
+    "@types/react-helmet": "^6.1.11",
     "@types/react-router-dom": "^5.3.3",
     "@types/styled-components": "^5.1.34"
   }

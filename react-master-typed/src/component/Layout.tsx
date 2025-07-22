@@ -49,7 +49,6 @@ export const Loader = styled.span`
     text-align: center;
     display: block;
 `;
-
 export const Overview = styled.div`
   display: flex;
   justify-content: space-between;
@@ -96,3 +95,18 @@ export const Tab = styled.span<{ $isActive: boolean }>`
     display: block;
   }
 `;
+
+export const ReturnBtn = styled.div`
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    a {
+        background-color: rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
+        width: 30%;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+`

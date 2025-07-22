@@ -1,11 +1,22 @@
 import {useParams} from "react-router";
-import {ICoin, IInfoData, IPriceData, RouteParams, RouteState} from "../interface/coinInterface";
+import {IInfoData, IPriceData, RouteParams, RouteState} from "../interface/coinInterface";
 import {Link, Route, Switch, useLocation, useRouteMatch} from "react-router-dom";
-import {Container, Description, Header, Loader, Overview, OverviewItem, Tab, Tabs, Title} from "../component/Layout";
+import {
+    Container,
+    Description,
+    Header,
+    Loader,
+    Overview,
+    OverviewItem, ReturnBtn,
+    Tab,
+    Tabs,
+    Title
+} from "../component/Layout";
 import Chart from "./Chart";
 import Price from "./Price";
 import {useQuery} from "@tanstack/react-query";
 import {fetchCoinInfo, fetchCoinTickers} from "../api/api";
+import {Helmet} from "react-helmet-async";
 
 const Coin = () => {
     const { coinId } = useParams<RouteParams>();
@@ -21,18 +32,29 @@ const Coin = () => {
     const { isLoading: tickersLoading, data: priceInfo} = useQuery<IPriceData>(
         {
             queryKey: ["tickers", coinId],
-            queryFn: () => fetchCoinTickers(coinId)
+            queryFn: () => fetchCoinTickers(coinId),
+            // refetchInterval: 5000
         }
     );
     const loading = infoLoading || tickersLoading;
     return (
         <Container>
+            <Helmet>
+                <title>
+                    {state?.name ? state.name : loading ? "Loading..." : coinInfo?.name}
+                </title>
+            </Helmet>
             <Header>
                 <Title>
                     {state?.name ? state.name : loading ? "Loading..." : coinInfo?.name}
                 </Title>
             </Header>
-            {loading ? (
+            <ReturnBtn>
+                <Link to={{pathname:`/`}}>
+                    <span>back</span>
+                </Link>
+            </ReturnBtn>
+            { loading ? (
                 <Loader>Loading...</Loader>
             ) : (
                 <>
@@ -46,8 +68,8 @@ const Coin = () => {
                             <span>${coinInfo?.symbol}</span>
                         </OverviewItem>
                         <OverviewItem>
-                            <span>Open Source:</span>
-                            <span>{coinInfo?.open_source ? "Yes" : "No"}</span>
+                            <span>Price:</span>
+                            <span>{priceInfo?.quotes.USD.price.toFixed(2)}</span>
                         </OverviewItem>
                     </Overview>
                     <Description>{coinInfo?.description}</Description>
@@ -61,8 +83,8 @@ const Coin = () => {
                             <span>{priceInfo?.max_supply}</span>
                         </OverviewItem>
                     </Overview>
-
                     <Tabs>
+                        {/* 변수명 앞에 $를 붙여줘야 콘솔에 오류가 안남 */}
                         <Tab $isActive={chartMatch !== null}>
                             <Link to={`/${coinId}/chart`}>Chart</Link>
                         </Tab>
@@ -72,7 +94,7 @@ const Coin = () => {
                     </Tabs>
                     <Switch>
                         <Route path={`/:coinId/price`}>
-                            <Price />
+                            <Price coinId={coinId}/>
                         </Route>
                         <Route path={`/:coinId/chart`}>
                             <Chart coinId={coinId}/>

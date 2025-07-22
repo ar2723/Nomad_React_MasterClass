@@ -1,75 +1,63 @@
 import {useQuery} from "@tanstack/react-query";
 import {fetchCoinHistory} from "../api/api";
 import ReactApexChart from "react-apexcharts";
+import {IHistorical, RouteParams} from "../interface/coinInterface";
+import {Loader} from "../component/Layout";
 
-interface ChartProps {
-    coinId: string;
-}
-
-interface IHistorical {
-    time_open: number;
-    time_close: number;
-    open: string;
-    high: string;
-    low: string;
-    close: string;
-    volume: string;
-    market_cap: number;
-}
-
-function Chart(props: ChartProps) {
+function Chart(props: RouteParams) {
     const {isLoading, data} = useQuery<IHistorical[]>(
-        { queryKey: ["ohlcv", props.coinId ], queryFn: () => fetchCoinHistory(props.coinId)}
+        {
+            queryKey: ["ohlcv", props.coinId ],
+            queryFn: () => fetchCoinHistory(props.coinId),
+            // refetchInterval: 10000
+        }
     );
-    return (
-        <div>
-            {isLoading ? "Loading chard..."
-                : <ReactApexChart
-                    type="line"
-                    series={[
-                        {
-                            name: "sales",
-                            data: data?.map(price => Number(price.close)) ?? [],
+    return isLoading ? (
+        <Loader>"Loading chard..."</Loader>
+        ) : (
+            <ReactApexChart
+                type="line"
+                series={[
+                    {
+                        name: "sales",
+                        data: data?.map(price => Number(price.close)) ?? []
+                    }
+                ]}
+                options={{
+                    theme: {mode: "dark"},
+                    chart: {
+                        height: 300,
+                        width: "100%",
+                        toolbar: {show: false},
+                        background: "transparent",
+                    },
+                    grid: {show: false},
+                    stroke: {
+                        curve: "smooth",
+                        width: 4,
+                    },
+                    yaxis: {show: false},
+                    xaxis: {
+                        type: "datetime",
+                        axisTicks: {show: false},
+                        // labels: {show: false},
+                        // axisBorder: {show: false},
+                        categories: data?.map(price => new Date(price.time_close * 1000).toUTCString()),
+                    },
+                    fill: {
+                        type: "gradient",
+                        gradient: {
+                            gradientToColors: ["#0be881"],
+                            stops: [0, 100],
                         }
-                    ]}
-                    options={{
-                        theme: {
-                            mode: "dark"
-                        },
-                        chart: {
-                            height: 300,
-                            width: "100%",
-                            toolbar: {
-                                show: false
-                            },
-                            background: "transparent",
-                        },
-                        grid: {
-                            show: false
-                        },
-                        stroke: {
-                            curve: "smooth",
-                            width: 4,
-                        },
-                        yaxis: {
-                            show: false
-                        },
-                        xaxis: {
-                            axisTicks: {
-                                show: false
-                            },
-                            labels: {
-                                show: false
-                            },
-                            axisBorder: {
-                                show: false
-                            }
-                        }
-                    }}
-                />
-            }
-        </div>
-    )
-}
+                    },
+                    colors: ["#0fbcf9"],
+                    tooltip: {
+                        y: {formatter: (value) => `$${value.toFixed(2)}`}
+                    }
+                }}
+            />
+        )
+    }
 
 export default Chart;
