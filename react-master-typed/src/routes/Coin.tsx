@@ -17,7 +17,7 @@ import Price from "./Price";
 import {useQuery} from "@tanstack/react-query";
 import {fetchCoinInfo, fetchCoinTickers} from "../api/api";
 import {currencyFormatter} from "../utils/util";
-import {Helmet} from "react-helmet";
+import {Helmet} from "react-helmet-async";
 
 const Coin = () => {
     const { coinId } = useParams<RouteParams>();
@@ -25,17 +25,11 @@ const Coin = () => {
     const priceMatch = useRouteMatch("/:coinId/price");
     const chartMatch = useRouteMatch("/:coinId/chart");
     const { isLoading: infoLoading, data: coinInfo} = useQuery<IInfoData>(
-        {
-            queryKey: ["info", coinId],
-            queryFn: () => fetchCoinInfo(coinId)
-        }
+        {queryKey: ["info", coinId], queryFn: () => fetchCoinInfo(coinId)}
     );
     const { isLoading: tickersLoading, data: priceInfo} = useQuery<IPriceData>(
-        {
-            queryKey: ["tickers", coinId],
-            queryFn: () => fetchCoinTickers(coinId),
-            // refetchInterval: 5000
-        }
+        {queryKey: ["tickers", coinId], queryFn: () => fetchCoinTickers(coinId),}
+        // refetchInterval: 5000
     );
     const loading = infoLoading || tickersLoading;
     return (
