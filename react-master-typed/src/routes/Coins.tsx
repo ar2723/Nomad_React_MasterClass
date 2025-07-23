@@ -2,14 +2,17 @@ import {Link} from "react-router-dom";
 import {Container, Loader, Title, Header, Coin, CoinList, Img} from "../component/Layout";
 import {fetchCoins} from "../api/api";
 import {useQuery} from "@tanstack/react-query";
-import {ICoin, ICoinProps} from "../interface/coinInterface";
-import {Helmet} from "react-helmet-async";
+import {ICoin} from "../interface/coinInterface";
+import {useRecoilValue} from "recoil";
+import {isDarkAtom} from "../atoms";
+import React from "react";
+import {Helmet} from "react-helmet";
 
-const Coins = ({toggleDark}:ICoinProps) => {
+const Coins = () => {
     // react-query hook
     //  불러온 데이터를 캐시에 저장해두기 때문에 다른 페이지를 갔다와도 다시 로딩이 되지 않음
-    const { isLoading, data } = useQuery<ICoin[]>(
-        { queryKey: ["allCoins"], queryFn: fetchCoins });
+    const { isLoading, data } = useQuery<ICoin[]>({ queryKey: ["allCoins"], queryFn: fetchCoins });
+    const isDark = useRecoilValue(isDarkAtom);
     return (
         <Container>
             <Helmet>
@@ -17,7 +20,7 @@ const Coins = ({toggleDark}:ICoinProps) => {
             </Helmet>
             <Header>
                 <Title>코인</Title>
-                <button onClick={toggleDark}>Toggle Dark Mode</button>
+                <button>Toggle Dark Mode</button>
             </Header>
             {isLoading ? (
                 <Loader>"Loading..."</Loader>

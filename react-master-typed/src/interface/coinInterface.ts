@@ -4,21 +4,10 @@ export interface RouteParams {
 
 export interface IChartProps {
     coinId : string;
-    isDark? : boolean;
 }
 
 export interface RouteState {
     name : string;
-}
-
-export interface IRouteProps {
-    toggleDark: () => void;
-    isDark: boolean;
-}
-
-export interface ICoinProps {
-    toggleDark?: () => void;
-    isDark?: boolean;
 }
 
 export interface ICoin {
