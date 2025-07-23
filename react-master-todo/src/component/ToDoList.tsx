@@ -1,20 +1,26 @@
-import {useForm} from "react-hook-form";
-import {ITodo} from "../interface/todoInterface";
+import {Container} from "./Layout";
+import {Helmet} from "react-helmet-async";
+import {useRecoilValue} from "recoil";
+import CreateToDo from "./CreateToDo";
+import {toDoState} from "../atoms/todoAtoms";
+import ToDo from "./ToDo";
 
 function ToDoList(){
-    const { register, handleSubmit, setValue } = useForm<ITodo>()
-    const handleValid = (data:ITodo) => {
-        console.log('add to do', data.todo);
-        setValue("todo", "")
-    }
+    const toDos = useRecoilValue(toDoState);
     return (
         <>
-            <div>
-                <form onSubmit={handleSubmit(handleValid)}>
-                    <input {...register("todo")} placeholder={"Write a to do"}/>
-                    <button>Add</button>
-                </form>
-            </div>
+            <Helmet>
+                <title>TodoList</title>
+            </Helmet>
+            <Container>
+                <h1>To Dos</h1> <hr/>
+                <CreateToDo/>
+                <ul>
+                    {toDos.map((todo) =>
+                        <ToDo key={todo.id} {...todo} />
+                    )}
+                </ul>
+            </Container>
         </>
     )
 }

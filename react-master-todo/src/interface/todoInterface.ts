@@ -13,8 +13,12 @@ export interface IFormData {
     extraError?: string;
 }
 
-export interface ITodo {
+export interface IForm {
     todo: string;
-    completed: boolean;
+}
+
+export interface IToDo {
+    text: string;
+    category: "TO_DO"|"DOING"|"DONE";
     id: number;
 }
