@@ -10,4 +10,11 @@ export interface IFormData {
     email: string;
     password: string;
     CheckingPassword: string;
+    extraError?: string;
+}
+
+export interface ITodo {
+    todo: string;
+    completed: boolean;
+    id: number;
 }
