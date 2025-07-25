@@ -1,4 +1,4 @@
-import {atom, selector} from "recoil";
+import {atom, AtomEffect, selector} from "recoil";
 
 export interface IFormData {
     errors: {
@@ -31,15 +31,10 @@ export interface IToDo {
     id: number;
 }
 
-const localStorageEffect = ({ setSelf, onSet }: any) => {
+const localStorageEffect: AtomEffect<IToDo[]> = ({ setSelf, onSet }) => {
     const toDos = localStorage.getItem("toDos");
-    if (toDos) {
-        setSelf(JSON.parse(toDos));
-    }
-
-    onSet((toDos: IToDo[]) => {
-        localStorage.setItem("toDos", JSON.stringify(toDos));
-    });
+    if (toDos) setSelf(JSON.parse(toDos));
+    onSet((toDos: IToDo[]) => localStorage.setItem("toDos", JSON.stringify(toDos)));
 };
 
 export const categoryState = atom<Categories>({
