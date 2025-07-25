@@ -1,6 +1,5 @@
-import {IToDo} from "../interface/todoInterface";
+import {Categories, IToDo, toDoState} from "../interface/todoInterface";
 import {useSetRecoilState} from "recoil";
-import {toDoState} from "../atoms/todoAtoms";
 
 
 const ToDo = (props:IToDo) => {
@@ -17,12 +16,12 @@ const ToDo = (props:IToDo) => {
     }
     return (
         <li>{props.text}
-            {props.category !== "DOING" &&
-                <button name="DOING" onClick={onClick}>Doing</button>}
-            {props.category !== "TO_DO" &&
-                <button name="TO_DO" onClick={onClick}>To Do</button>}
-            {props.category !== "DONE" &&
-                <button name="DONE" onClick={onClick}>Done</button>}
+            {props.category !== Categories.DOING &&
+                <button name={Categories.DOING} onClick={onClick}>Doing</button>}
+            {props.category !== Categories.TO_DO &&
+                <button name={Categories.TO_DO} onClick={onClick}>To Do</button>}
+            {props.category !== Categories.DONE &&
+                <button name={Categories.DONE} onClick={onClick}>Done</button>}
         </li>
     );
 }
