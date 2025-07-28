@@ -1,35 +1,52 @@
 import React from 'react';
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
+import {DragDropContext, Droppable, Draggable, DropResult} from "react-beautiful-dnd"
+import {GlobalStyle} from "./theme/GlobalStyle";
+import {Board, Boards, Card, Wrapper} from "./component/layout";
+import {useRecoilState} from "recoil";
+import {toDoState} from "./interface/toDoState";
+
+
+
 
 function App() {
-    const onDragEnd = () => {
-
+    const [toDos, setToDos] = useRecoilState(toDoState)
+    const onDragEnd = ({ draggableId, destination, source }:DropResult) => {
+        if(!destination) return;
+        setToDos(oldToDos => {
+            const copyToDos = [...oldToDos];
+            // 1) Delete item on source.index
+            copyToDos.splice(source.index, 1);
+            // 2) Put back the item on the destination.index
+            copyToDos.splice(destination?.index, 0, draggableId);
+            return copyToDos;
+        })
     }
     return (
-        <DragDropContext onDragEnd={onDragEnd}>
-            <Droppable droppableId={"one"}>
-                {(provided, snapshot) =>
-                    <ul {...provided.droppableProps} ref={provided.innerRef}>
-                        <Draggable draggableId={"first"} index={0}>
+        <>
+            <GlobalStyle />
+            <DragDropContext onDragEnd={onDragEnd}>
+                <Wrapper>
+                    <Boards>
+                        <Droppable droppableId={"one"}>
                             {(provided) =>
-                                <li ref={provided.innerRef}
-                                    {...provided.dragHandleProps}
-                                    {...provided.draggableProps}>One
-                                </li>
+                                <Board ref={provided.innerRef} {...provided.droppableProps}>
+                                    {toDos.map(((todo, index) => (
+                                        <Draggable key={todo} draggableId={todo} index={index}>
+                                            {(provided) =>
+                                                <Card ref={provided.innerRef} {...provided.dragHandleProps} {...provided.draggableProps}>
+                                                    {todo}
+                                                </Card>
+                                            }
+                                        </Draggable>
+                                    )))}
+                                    {provided.placeholder}
+                                </Board>
                             }
-                        </Draggable>
-                        <Draggable draggableId={"second"} index={1}>
-                            {(provided) =>
-                                <li ref={provided.innerRef}
-                                    {...provided.dragHandleProps}
-                                    {...provided.draggableProps}>Two
-                                </li>
-                            }
-                        </Draggable>
-                    </ul>
-                }
-            </Droppable>
-        </DragDropContext>
+                        </Droppable>
+                    </Boards>
+                </Wrapper>
+            </DragDropContext>
+        </>
     );
 }
 

@@ -11,13 +11,11 @@ const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 root.render(
-    <React.StrictMode>
-        <HelmetProvider>
-            <RecoilRoot>
-                <ThemeProvider theme={darkTheme} >
-                    <App />
-                </ThemeProvider>
-            </RecoilRoot>
-        </HelmetProvider>
-    </React.StrictMode>
+    <HelmetProvider>
+        <RecoilRoot>
+            <ThemeProvider theme={darkTheme} >
+                <App />
+            </ThemeProvider>
+        </RecoilRoot>
+    </HelmetProvider>
 );
