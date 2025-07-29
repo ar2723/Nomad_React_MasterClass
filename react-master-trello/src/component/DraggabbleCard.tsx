@@ -12,8 +12,9 @@ function DraggableCard({todo, index}: IDraggableCardProps) {
     return (
         // 여기서 key와 draggableId를 반드시 일치시켜줘야 함 - 왜인지는 모르겠으나 다르면 버그가 발생
         <Draggable key={todo} draggableId={todo} index={index}>
-            {(provided) =>
-                <Card ref={provided.innerRef} {...provided.dragHandleProps} {...provided.draggableProps}>
+            {(provided, snapshot) =>
+                <Card isDragging={snapshot.isDragging}
+                    ref={provided.innerRef} {...provided.dragHandleProps} {...provided.draggableProps}>
                     {todo}
                 </Card>
             }
