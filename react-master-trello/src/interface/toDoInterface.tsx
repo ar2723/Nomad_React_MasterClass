@@ -21,6 +21,7 @@ export interface IDraggableCardProps {
     todoId: number,
     todoText: string,
     index: number,
+    boardId: string,
 }
 
 export interface IForm {

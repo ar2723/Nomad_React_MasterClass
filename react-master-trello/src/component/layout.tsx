@@ -4,6 +4,7 @@ import {IAreaProps} from "../interface/toDoInterface";
 
 export const Wrapper = styled.div`
     display: flex;
+    flex-direction: column;
     max-width:680px;
     width: 100%;
     margin: 0 auto;
@@ -37,11 +38,21 @@ export const Title = styled.h2`
 `;
 
 export const Card = styled.div<{ $isDragging: boolean }>`
+    display: flex;
+    justify-content: space-between;
     background-color: ${props => props.$isDragging ? "#74b9ff" : props.theme.cardColor};
     box-shadow: ${props => props.$isDragging ? "0 2px 5px rgba(0,0,0,0.05)" : "none"};
     border-radius: 5px;
     padding: 10px 10px;
     margin-bottom: 5px;
+    button {
+        background-color: transparent;
+        border: none;
+        color: grey;
+        font-weight: 600;
+        font-size: 15px;
+        cursor: pointer;
+    }
 `
 
 export const Area = styled.div<IAreaProps>`
@@ -62,4 +73,14 @@ export const Form = styled.form`
     input {
         width: 100%;
     }
+`
+
+export const TrashcanArea = styled.div`
+    max-width:680px;
+    width: 33%;
+    margin: 0 auto;
+    margin-top: 50px;
+    height: 100px;
+    border-radius: 5px;
+    background-color: #f4f7f8;
 `

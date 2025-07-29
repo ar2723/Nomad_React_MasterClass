@@ -44,6 +44,7 @@ function Board({toDos, boardId} : IBoardProps) {
                                 todoId={todo.id}
                                 index={index}
                                 todoText={todo.text}
+                                boardId={boardId}
                             />
                         )}
                         {provided.placeholder}
