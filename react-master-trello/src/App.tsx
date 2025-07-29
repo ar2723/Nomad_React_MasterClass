@@ -3,7 +3,7 @@ import {DragDropContext, DropResult} from "react-beautiful-dnd"
 import {GlobalStyle} from "./theme/GlobalStyle";
 import {Boards, Wrapper} from "./component/layout";
 import {useRecoilState} from "recoil";
-import {toDoState} from "./interface/toDoState";
+import {toDoState} from "./atoms/toDoState";
 import Board from "./component/Board";
 
 function App() {

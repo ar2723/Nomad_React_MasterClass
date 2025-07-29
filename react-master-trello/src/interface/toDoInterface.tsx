@@ -1,11 +1,9 @@
-import {atom} from "recoil";
-
 export interface ITodo {
     id:number;
     text: string;
 }
 
-interface IToDoState {
+export interface IToDoState {
     [key: string]: ITodo[];
 }
 
@@ -28,12 +26,3 @@ export interface IDraggableCardProps {
 export interface IForm {
     todo: string;
 }
-
-export const toDoState = atom<IToDoState>({
-    key: 'toDo',
-    default: {
-        "To Do": [],
-        doing: [],
-        done: []
-    },
-})

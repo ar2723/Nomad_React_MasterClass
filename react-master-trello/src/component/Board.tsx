@@ -1,9 +1,10 @@
 import {Droppable} from "react-beautiful-dnd";
 import DraggabbleCard from "./DraggabbleCard";
 import {Area, BoardWrapper, Form, Title} from "./layout";
-import {IBoardProps, IForm, toDoState} from "../interface/toDoState";
+import {toDoState} from "../atoms/toDoState";
 import {useForm} from "react-hook-form";
 import {useSetRecoilState} from "recoil";
+import {IBoardProps, IForm} from "../interface/toDoInterface";
 
 function Board({toDos, boardId} : IBoardProps) {
     const setToDos = useSetRecoilState(toDoState);

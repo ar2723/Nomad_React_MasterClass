@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {IAreaProps} from "../interface/toDoState";
+import {IAreaProps} from "../interface/toDoInterface";
 
 
 export const Wrapper = styled.div`

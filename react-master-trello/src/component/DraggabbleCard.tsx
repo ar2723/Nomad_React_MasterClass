@@ -1,7 +1,7 @@
 import {Card} from "./layout";
 import {Draggable} from "react-beautiful-dnd";
 import React from "react";
-import {IDraggableCardProps} from "../interface/toDoState";
+import {IDraggableCardProps} from "../interface/toDoInterface";
 
 function DraggableCard({todoId, index, todoText}: IDraggableCardProps) {
     return (
