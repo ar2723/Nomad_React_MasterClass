@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {IAreaProps} from "../interface/toDoState";
 
 
 export const Wrapper = styled.div`
@@ -19,7 +20,7 @@ export const Boards = styled.div`
 `;
 
 export const BoardWrapper = styled.div`
-    padding: 10px 0px;
+    padding: 10px 0;
     padding-top: 30px;
     background-color: ${props => props.theme.boardColor};
     border-radius: 5px;
@@ -35,10 +36,30 @@ export const Title = styled.h2`
     font-size: 18px;
 `;
 
-export const Card = styled.div<{ isDragging: boolean }>`
-    background-color: ${props => props.isDragging ? "#74b9ff" : props.theme.cardColor};
-    box-shadow: ${props => props.isDragging ? "0 2px 5px rgba(0,0,0,0.05)" : "none"};
+export const Card = styled.div<{ $isDragging: boolean }>`
+    background-color: ${props => props.$isDragging ? "#74b9ff" : props.theme.cardColor};
+    box-shadow: ${props => props.$isDragging ? "0 2px 5px rgba(0,0,0,0.05)" : "none"};
     border-radius: 5px;
     padding: 10px 10px;
     margin-bottom: 5px;
+`
+
+export const Area = styled.div<IAreaProps>`
+    background-color: ${props =>
+    props.$isDraggingOver
+        ? "#dfe6e9"
+        : props.$isDraggingFromThis
+            ? "#b2bec3"
+            : "transparent"
+};
+    flex-grow: 1;
+    transition: background-color .3s ease-in-out;
+    padding: 20px;
+`
+
+export const Form = styled.form`
+    width: 100%;
+    input {
+        width: 100%;
+    }
 `

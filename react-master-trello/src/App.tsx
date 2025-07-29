@@ -2,25 +2,24 @@ import React from 'react';
 import {DragDropContext, DropResult} from "react-beautiful-dnd"
 import {GlobalStyle} from "./theme/GlobalStyle";
 import {Boards, Wrapper} from "./component/layout";
-import {RecoilLoadable, useRecoilState} from "recoil";
+import {useRecoilState} from "recoil";
 import {toDoState} from "./interface/toDoState";
 import Board from "./component/Board";
-import all = RecoilLoadable.all;
 
 function App() {
     const [toDos, setToDos] = useRecoilState(toDoState)
     const onDragEnd = (info:DropResult) => {
-        console.log(info);
-        const {destination, draggableId, source} = info;
+        const {destination, source} = info;
         if(!destination) return;
         // same board movement.
         if(destination.droppableId === source.droppableId) {
             setToDos((allBoards) => {
                 const boardCopy = [...allBoards[source.droppableId]];
+                const taskObj = boardCopy[source.index];
                 // 1) Delete item on source.index
                 boardCopy.splice(source.index, 1);
                 // 2) Put back the item on the destination.index
-                boardCopy.splice(destination.index, 0, draggableId);
+                boardCopy.splice(destination.index, 0, taskObj);
                 return {
                     ...allBoards,
                     [source.droppableId]: boardCopy
@@ -31,10 +30,11 @@ function App() {
         else if(destination.droppableId !== source.droppableId) {
             setToDos(allBoards => {
                 const sourceBoard = [...allBoards[source.droppableId]];
+                const taskObj = sourceBoard[source.index];
                 const targetBoard = [...allBoards[destination.droppableId]];
 
                 sourceBoard.splice(source.index, 1);
-                targetBoard.splice(destination.index, 0, draggableId);
+                targetBoard.splice(destination.index, 0, taskObj);
 
                 return {
                     ...allBoards,
