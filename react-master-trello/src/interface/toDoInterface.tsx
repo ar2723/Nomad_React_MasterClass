@@ -13,8 +13,9 @@ export interface IBoardProps {
 }
 
 export interface IAreaProps {
-    $isDraggingOver: boolean,
-    $isDraggingFromThis: boolean,
+    $isDraggingOver?: boolean,
+    $isDraggingFromThis?: boolean,
+    $draggingOverWith?:boolean,
 }
 
 export interface IDraggableCardProps {

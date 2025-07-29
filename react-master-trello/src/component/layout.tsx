@@ -62,9 +62,9 @@ export const Area = styled.div<IAreaProps>`
         : props.$isDraggingFromThis
             ? "#b2bec3"
             : "transparent"
-};
+    };
     flex-grow: 1;
-    transition: background-color .3s ease-in-out;
+    transition: background-color .2s ease-in-out;
     padding: 20px;
 `
 
@@ -73,14 +73,32 @@ export const Form = styled.form`
     input {
         width: 100%;
     }
+    input::placeholder {
+        text-align: center;
+    }
 `
 
 export const TrashcanArea = styled.div`
-    max-width:680px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 680px;
     width: 33%;
     margin: 0 auto;
     margin-top: 50px;
+    text-align: center;
+`
+
+export const TrashBox = styled.div<IAreaProps>`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
     height: 100px;
     border-radius: 5px;
-    background-color: #f4f7f8;
+    background-color: ${props => props.$isDraggingOver ? "#dfe6e9" : "#f4f7f8"};
+    transition: background-color .2s ease-in-out;
+    span {
+        display: ${props => props.$isDraggingOver ? "none" : "block"};
+    }
 `

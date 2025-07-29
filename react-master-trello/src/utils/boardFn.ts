@@ -5,8 +5,17 @@ import {SetterOrUpdater} from "recoil";
 export const controllCardMovement = (info:DropResult, setToDos: SetterOrUpdater<IToDoState>) => {
     const {destination, source} = info;
     if(!destination) return;
+
+    if(destination.droppableId === "trash") {
+        if(!window.confirm("Do you want to delete this task?")) return;
+        setToDos(allBoards => {
+            const copyBoard = [...allBoards[source.droppableId]];
+            copyBoard.splice(source.index, 1);
+            return {...allBoards, [source.droppableId]: copyBoard};
+        })
+    }
     // same board movement.
-    if(destination.droppableId === source.droppableId) {
+    else if(destination.droppableId === source.droppableId) {
         setToDos((allBoards) => {
             const boardCopy = [...allBoards[source.droppableId]];
             const taskObj = boardCopy[source.index];
