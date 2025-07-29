@@ -37,15 +37,15 @@ const localStorageEffect: AtomEffect<IToDo[]> = ({ setSelf, onSet }) => {
     onSet((toDos: IToDo[]) => localStorage.setItem("toDos", JSON.stringify(toDos)));
 };
 
-export const categoryState = atom<Categories>({
-    key:"category",
-    default:Categories.TO_DO
-});
-
 export const toDoState = atom<IToDo[]>({
     key:"toDo",
     default: [],
     effects: [localStorageEffect]
+});
+
+export const categoryState = atom<Categories>({
+    key:"category",
+    default:Categories.TO_DO
 });
 
 // toDoSelector를 통해 state의 output을 변경하는 것
