@@ -16,3 +16,8 @@ export const toDoState = atom<IToDoState>({
     },
     effects: [localStorageEffect]
 })
+
+export const boardState = atom<string[]>({
+    key: 'board',
+    default: ["To Do", "doing", "done"],
+})
