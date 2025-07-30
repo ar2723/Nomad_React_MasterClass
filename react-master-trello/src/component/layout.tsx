@@ -22,12 +22,26 @@ export const Boards = styled.div`
 
 export const BoardWrapper = styled.div`
     padding: 10px 0;
-    padding-top: 30px;
     background-color: ${props => props.theme.boardColor};
     border-radius: 5px;
     min-height: 300px;
     display: flex;
     flex-direction: column;
+`;
+
+export const Button = styled.div`
+    display: flex;
+    justify-content: right;
+    margin: 0 10px;
+    button {
+        background-color: transparent;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        color: grey;
+        font-weight: 600;
+        font-size: 18px;
+        cursor: pointer;
+    }
 `;
 
 export const Title = styled.h2`
@@ -47,7 +61,8 @@ export const Card = styled.div<{ $isDragging: boolean }>`
     margin-bottom: 5px;
     button {
         background-color: transparent;
-        border: none;
+        border: 1px solid #ccc;
+        border-radius: 5px;
         color: grey;
         font-weight: 600;
         font-size: 15px;

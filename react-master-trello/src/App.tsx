@@ -20,14 +20,10 @@ function App() {
         setBoards(keys)
     }, [toDos, setBoards])
 
-    const onDragEnd = (info:DropResult) => {
-        controllCardMovement(info, setToDos);
-    }
+    const onDragEnd = (info:DropResult) => controllCardMovement(info, setToDos);
 
     const onValid = ({ board }: IForm) => {
-        setBoards(allBoards => {
-            return [...allBoards, board]
-        })
+        setBoards(allBoards => [...allBoards, board])
         setToDos(allBoards => {
             return {
                 ...allBoards,
