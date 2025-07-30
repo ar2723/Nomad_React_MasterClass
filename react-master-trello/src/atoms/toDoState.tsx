@@ -9,15 +9,11 @@ const localStorageEffect: AtomEffect<IToDoState> = ({ setSelf, onSet }) => {
 
 export const toDoState = atom<IToDoState>({
     key: 'toDo',
-    default: {
-        "To Do": [],
-        doing: [],
-        done: []
-    },
+    default: {},
     effects: [localStorageEffect]
 })
 
 export const boardState = atom<string[]>({
     key: 'board',
-    default: ["To Do", "doing", "done"],
+    default: [],
 })

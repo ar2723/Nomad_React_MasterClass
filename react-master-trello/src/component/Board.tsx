@@ -9,23 +9,17 @@ import {IBoardProps, IForm} from "../interface/toDoInterface";
 function Board({toDos, boardId} : IBoardProps) {
     const setToDos = useSetRecoilState(toDoState);
     const {register, setValue, handleSubmit} = useForm<IForm>();
-    const onVaild = ({todo}: IForm) => {
-        const newToDo = {
-            id: Date.now(),
-            text: todo
-        }
+    const onValid = ({todo}: IForm) => {
+        const newToDo = { id: Date.now(), text: todo }
         setToDos(allBoards => {
-            return {
-                ...allBoards,
-                [boardId]: [...allBoards[boardId],  newToDo],
-            }
+            return { ...allBoards, [boardId]: [...allBoards[boardId], newToDo] }
         })
         setValue("todo", "");
     }
     return (
         <BoardWrapper>
             <Title>{boardId}</Title>
-            <Form onSubmit={handleSubmit(onVaild)}>
+            <Form onSubmit={handleSubmit(onValid)}>
                 <input
                     {...register("todo", { required: true })}
                     type="text"

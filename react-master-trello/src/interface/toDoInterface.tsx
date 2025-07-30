@@ -27,4 +27,5 @@ export interface IDraggableCardProps {
 
 export interface IForm {
     todo: string;
+    board: string;
 }

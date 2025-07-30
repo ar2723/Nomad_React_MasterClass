@@ -5,7 +5,7 @@ import {IAreaProps} from "../interface/toDoInterface";
 export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
-    max-width:680px;
+    max-width:1200px;
     width: 100%;
     margin: 0 auto;
     justify-content: center;
@@ -16,7 +16,7 @@ export const Wrapper = styled.div`
 export const Boards = styled.div`
     display: grid;
     width: 100%;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 10px;
 `;
 
@@ -70,8 +70,12 @@ export const Area = styled.div<IAreaProps>`
 
 export const Form = styled.form`
     width: 100%;
+    margin-bottom: 20px;
     input {
         width: 100%;
+        height: 30px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
     }
     input::placeholder {
         text-align: center;
