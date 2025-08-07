@@ -46,7 +46,7 @@ const Coin = () => {
             </Header>
             <ReturnBtn>
                 <Link to={{pathname:`/`}}>
-                    <span>back</span>
+                    <span>home</span>
                 </Link>
             </ReturnBtn>
             { loading ? (
@@ -89,10 +89,10 @@ const Coin = () => {
                     </Tabs>
                     <Switch>
                         <Route path={`/:coinId/price`}>
-                            <Price coinId={coinId}/>
+                            <Chart coinId={coinId}/>
                         </Route>
                         <Route path={`/:coinId/chart`}>
-                            <Chart coinId={coinId}/>
+                            <Price coinId={coinId}/>
                         </Route>
                     </Switch>
                 </>
