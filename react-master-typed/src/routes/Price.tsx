@@ -17,7 +17,7 @@ function Price(props: IChartProps) {
         }
     );
     return isLoading ? (
-        <Loader>"Loading price..."</Loader>
+        <Loader>"Loading Chart..."</Loader>
     ) : (
         <ReactApexChart
             type="candlestick"

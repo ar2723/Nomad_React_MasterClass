@@ -16,7 +16,7 @@ function Chart(props: IChartProps) {
         }
     );
     return isLoading ? (
-        <Loader>"Loading chard..."</Loader>
+        <Loader>"Loading Price..."</Loader>
         ) : (
             <ReactApexChart
                 type="line"
