@@ -1,15 +1,17 @@
 import React from 'react';
 import {GlobalStyle} from "./theme/GlobalStyle";
 import {Box, Wrapper} from "./interface/layout";
-import {motion} from "framer-motion";
 
 function App() {
   return (
       <>
           <GlobalStyle/>
           <Wrapper>
-              <Box/>
-              <motion.span animate={{x: 100}}/>
+              <Box
+                  initial={{ scale:0 }}
+                  animate={{ scale:1, rotateZ: 360 }}
+                  transition={{ type: "spring", damping: 5 }}
+              />
           </Wrapper>
       </>
   );

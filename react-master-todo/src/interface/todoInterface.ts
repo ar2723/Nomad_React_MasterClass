@@ -19,6 +19,11 @@ export interface IForm {
     todo: string;
 }
 
+export interface ICategory {
+    id: number;
+    category: string;
+}
+
 export enum Categories {
     TO_DO = "TO_DO",
     DOING = "DOING",
@@ -27,7 +32,7 @@ export enum Categories {
 
 export interface IToDo {
     text: string;
-    category: Categories;
+    category: string;
     id: number;
 }
 
@@ -37,11 +42,27 @@ const localStorageEffect: AtomEffect<IToDo[]> = ({ setSelf, onSet }) => {
     onSet((toDos: IToDo[]) => localStorage.setItem("toDos", JSON.stringify(toDos)));
 };
 
+const localStorageEffectForList: AtomEffect<ICategory[]> = ({ setSelf, onSet }) => {
+    const categories = localStorage.getItem("categoryList");
+    if (categories) setSelf(JSON.parse(categories));
+    onSet((categories: ICategory[]) => localStorage.setItem("categoryList", JSON.stringify(categories)));
+};
+
 export const toDoState = atom<IToDo[]>({
     key:"toDo",
     default: [],
     effects: [localStorageEffect]
 });
+
+export const categoryListState = atom<ICategory[]>({
+    key:"categoryList",
+    default: [
+        {id:1, category:Categories.TO_DO},
+        {id:2, category:Categories.DOING},
+        {id:3, category:Categories.DONE}
+    ],
+    effects: [localStorageEffectForList]
+})
 
 export const categoryState = atom<Categories>({
     key:"category",
