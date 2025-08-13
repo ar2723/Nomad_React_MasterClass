@@ -24,4 +24,7 @@ export const TodoListHeader = styled.div`
         font-size: 30px;
         color: beige;
     }
+    form {
+        width: 100%;
+    }
 `
