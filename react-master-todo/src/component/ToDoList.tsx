@@ -26,7 +26,11 @@ function ToDoList(){
         setCategory(event.currentTarget.value as any);
     }
     const onValid = ({category}: ICategory) => {
-        const newCategory = {id: Date.now(), category : category};
+        const newCategory = {
+              id: Date.now()
+            , category : category
+            , label: category
+        };
         setCategoryList(allCategory => {
             return [ ...allCategory, newCategory ];
         });
@@ -53,12 +57,11 @@ function ToDoList(){
                 <form>
                     <select value={category} onInput={onInput}>
                         {categoryList?.map(item =>
-                            <option key={item.id} value={item.category}>{item.category}</option>
+                            <option key={item.id} value={item.category}>{item.label}</option>
                         )}
                     </select>
                 </form>
                 <CreateToDo/>
-
                 {toDos?.map(aToDo => <ToDo key={aToDo.id} {...aToDo}/>)}
             </Container>
         </>

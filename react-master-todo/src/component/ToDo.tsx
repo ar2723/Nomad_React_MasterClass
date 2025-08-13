@@ -1,9 +1,10 @@
-import {Categories, IToDo, toDoState} from "../interface/todoInterface";
-import {useSetRecoilState} from "recoil";
+import {categoryListState, IToDo, toDoState} from "../interface/todoInterface";
+import {useRecoilValue, useSetRecoilState} from "recoil";
 
 
 const ToDo = (props:IToDo) => {
     const setToDos = useSetRecoilState(toDoState);
+    const categoryList = useRecoilValue(categoryListState);
     const onClick = (event:React.MouseEvent<HTMLButtonElement>) => {
         const {
             currentTarget: { name },
@@ -16,12 +17,11 @@ const ToDo = (props:IToDo) => {
     }
     return (
         <li>{props.text}
-            {props.category !== Categories.DOING &&
-                <button name={Categories.DOING} onClick={onClick}>Doing</button>}
-            {props.category !== Categories.TO_DO &&
-                <button name={Categories.TO_DO} onClick={onClick}>To Do</button>}
-            {props.category !== Categories.DONE &&
-                <button name={Categories.DONE} onClick={onClick}>Done</button>}
+            {categoryList?.map(category => {
+                if(category.category !== props.category) {
+                    return <button key={category.id} name={category.category} onClick={onClick}>{category.label}</button>
+                }}
+            )}
         </li>
     );
 }

@@ -22,6 +22,7 @@ export interface IForm {
 export interface ICategory {
     id: number;
     category: string;
+    label: string;
 }
 
 export enum Categories {
@@ -57,9 +58,9 @@ export const toDoState = atom<IToDo[]>({
 export const categoryListState = atom<ICategory[]>({
     key:"categoryList",
     default: [
-        {id:1, category:Categories.TO_DO},
-        {id:2, category:Categories.DOING},
-        {id:3, category:Categories.DONE}
+        {id:1, category:Categories.TO_DO, label: "To Do"},
+        {id:2, category:Categories.DOING, label: "Doing"},
+        {id:3, category:Categories.DONE, label: "Done"}
     ],
     effects: [localStorageEffectForList]
 })
